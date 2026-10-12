@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>이광희의 자기소개 노트</title>
+<meta name="description" content="경영정보학부 이광희가 데이터로 고객을 읽는 마케터가 되기 위해 해 온 일과 계획을 모아 둔 노트입니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;700&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap">
+<style>
+/* Layout: 한 줄짜리 노트. 좁은 본문 칼럼, 상단 바둑판 격자 히어로, 항목마다 돌(흑=완료, 백=계획)로 상태 표시 */
+:root {
+  --bg: #f5f6f4;
+  --surface: #ffffff;
+  --ink: #1b1f24;
+  --muted: #5b6470;
+  --line: #d9ddd8;
+  --accent: #2f5fa8;
+  --accent-soft: #e4ebf6;
+  --stone-black: #1b1f24;
+  --stone-white: #ffffff;
+  --display: "Hahmlet", "Noto Serif KR", "AppleMyungjo", serif;
+  --body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14171b; --surface: #1c2026; --ink: #e9ecef; --muted: #9aa3ad; --line: #2e343c;
+    --accent: #8fb1e8; --accent-soft: #1f2a3b; --stone-black: #050608; --stone-white: #e9ecef;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14171b; --surface: #1c2026; --ink: #e9ecef; --muted: #9aa3ad; --line: #2e343c;
+  --accent: #8fb1e8; --accent-soft: #1f2a3b; --stone-black: #050608; --stone-white: #e9ecef;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--body); font-size: 16px; line-height: 1.75;
+  padding-inline: 20px; word-break: keep-all; overflow-wrap: anywhere;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+.wrap { max-width: 720px; margin: 0 auto; }
+
+.skip { position: absolute; left: -999px; top: 8px; background: var(--ink); color: var(--bg); padding: 6px 12px; border-radius: 4px; z-index: 10; }
+.skip:focus { left: 16px; }
+
+header.top {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px;
+  padding-block: 20px; border-bottom: 1px solid var(--line);
+}
+.brand { font-family: var(--display); font-weight: 700; font-size: 1.15rem; color: var(--ink); text-decoration: none; }
+nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 18px; }
+nav a { color: var(--muted); text-decoration: none; font-size: .95rem; }
+nav a:hover { color: var(--ink); text-decoration: underline; }
+
+/* Hero: 바둑판 격자 */
+.hero { position: relative; padding-block: 56px 48px; }
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; opacity: .55;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 32px 32px; background-position: center;
+  -webkit-mask-image: radial-gradient(ellipse at 85% 30%, #000 0%, transparent 65%);
+          mask-image: radial-gradient(ellipse at 85% 30%, #000 0%, transparent 65%);
+}
+.eyebrow { font-size: .8rem; letter-spacing: .08em; color: var(--muted); margin: 0 0 12px; }
+h1 {
+  font-family: var(--display); font-weight: 700; font-size: clamp(1.9rem, 5.5vw, 2.7rem);
+  line-height: 1.3; margin: 0 0 18px; text-wrap: balance; letter-spacing: -.01em;
+}
+h1 em { font-style: normal; color: var(--accent); }
+.lead { font-size: 1.08rem; color: var(--ink); margin: 0 0 8px; max-width: 34em; }
+.note { font-size: .9rem; color: var(--muted); margin: 0 0 24px; }
+.cta {
+  display: inline-block; background: var(--ink); color: var(--bg); text-decoration: none;
+  padding: 10px 18px; border-radius: 6px; font-weight: 500; font-size: .95rem;
+}
+.cta:hover { opacity: .88; }
+
+section { padding-block: 44px; border-top: 1px solid var(--line); scroll-margin-top: 12px; }
+h2 { font-family: var(--display); font-weight: 700; font-size: 1.5rem; margin: 0 0 16px; text-wrap: balance; }
+h3 { font-family: var(--display); font-weight: 700; font-size: 1.2rem; line-height: 1.45; margin: 0 0 10px; text-wrap: balance; }
+p { margin: 0 0 14px; max-width: 65ch; }
+
+.facts { display: grid; grid-template-columns: max-content 1fr; gap: 6px 20px; margin: 18px 0 0; font-size: .95rem; }
+.facts dt { color: var(--muted); }
+.facts dd { margin: 0; min-width: 0; }
+
+/* 목차 목록 */
+.toc { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.toc a {
+  display: flex; align-items: baseline; gap: 12px; padding: 12px 14px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+  color: var(--ink); text-decoration: none;
+}
+.toc a:hover { border-color: var(--accent); }
+.toc .num { font-variant-numeric: tabular-nums; color: var(--muted); font-size: .85rem; min-width: 1.4em; }
+.toc .title { flex: 1; min-width: 0; font-weight: 500; }
+.tag {
+  font-size: .75rem; letter-spacing: .04em; padding: 2px 8px; border-radius: 999px;
+  background: var(--accent-soft); color: var(--accent); white-space: nowrap;
+}
+
+article.item { padding-block: 32px 8px; scroll-margin-top: 12px; }
+article.item + article.item { border-top: 1px dashed var(--line); }
+.meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; font-size: .85rem; color: var(--muted); }
+.key { font-weight: 600; }
+.back { font-size: .88rem; }
+
+/* 돌 = 상태 */
+.stone { display: inline-block; width: 14px; height: 14px; border-radius: 50%; flex: none; transform: translateY(2px); }
+.stone.b { background: radial-gradient(circle at 35% 30%, #5a616b, var(--stone-black) 60%); }
+.stone.w { background: var(--stone-white); border: 1.5px solid var(--muted); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: .85rem; color: var(--muted); margin: 0 0 18px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend .stone { transform: none; }
+
+.road { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line); margin-left: 7px; }
+.road li { position: relative; padding: 0 0 18px 24px; }
+.road li .stone { position: absolute; left: -7.5px; top: 6px; transform: none; }
+.road .when { font-weight: 600; font-size: .92rem; }
+.road .what { color: var(--muted); font-size: .95rem; margin: 2px 0 0; }
+
+.closing { padding-block: 40px 56px; border-top: 1px solid var(--line); }
+.closing p { color: var(--muted); }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#main">이광희</a>
+    <nav aria-label="주요 메뉴">
+      <ul>
+        <li><a href="#about">소개</a></li>
+        <li><a href="#letter">자기소개서</a></li>
+        <li><a href="#growth">준비 과정</a></li>
+        <li><a href="#vision">포부</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="hero">
+      <p class="eyebrow">경영정보학부 · 26학번 · 마케팅 직무 지망</p>
+      <h1>데이터로 고객의 <em>진짜 불편</em>을 찾는 마케터를 준비합니다</h1>
+      <p class="lead">경영과 IT를 함께 배우며, 좋은 마케팅은 감이 아니라 고객 행동에 대한 이해에서 나온다는 것을 알게 됐습니다.</p>
+      <p class="note">삼성전자 마케팅팀 지원 자기소개서를 바탕으로 정리한 노트입니다.</p>
+      <a class="cta" href="#letter">자기소개서 먼저 보기</a>
+    </div>
+
+    <section id="about" aria-labelledby="about-h">
+      <h2 id="about-h">소개</h2>
+      <p>국민대학교 경영정보학부 1학년 이광희입니다. 학생회 사무부원으로 대외활동 조사, 견적서 작성, 장소 예약, 복지 물품 관리, 행사 결과 보고서와 설문지 작성을 맡고 있습니다. 어릴 때부터 바둑을 두며 한 판을 끝까지 집중하고, 끝나면 반드시 복기하는 습관을 들였습니다.</p>
+      <dl class="facts">
+        <dt>소속</dt><dd>경영정보학부 1학년</dd>
+        <dt>지원</dt><dd>삼성전자 마케팅팀</dd>
+        <dt>자격증</dt><dd>컴퓨터활용능력 1급, Google Analytics(GAIQ)</dd>
+        <dt>취미</dt><dd>바둑 (인터넷 대국·대회 참여, 대국 후 복기)</dd>
+      </dl>
+    </section>
+
+    <section id="letter" aria-labelledby="letter-h">
+      <h2 id="letter-h">자기소개서</h2>
+      <ul class="toc">
+        <li><a href="#q1"><span class="num">1</span><span class="title">지원동기</span><span class="tag">구독해부</span></a></li>
+        <li><a href="#q2"><span class="num">2</span><span class="title">장점·단점</span><span class="tag">학생회</span></a></li>
+        <li><a href="#q3"><span class="num">3</span><span class="title">취미·특기</span><span class="tag">바둑 복기</span></a></li>
+        <li><a href="#q4"><span class="num">4</span><span class="title">직무 준비과정 및 역량개발 계획</span><span class="tag">자격증</span></a></li>
+        <li><a href="#q5"><span class="num">5</span><span class="title">계획·포부</span><span class="tag">글로벌</span></a></li>
+      </ul>
+
+      <article class="item" id="q1">
+        <div class="meta"><span class="tag">지원동기</span><span>핵심 경험: 바이브 코딩 챌린지 ‘구독해부’ 대시보드</span></div>
+        <h3>데이터로 고객의 진짜 불편을 찾아내는 마케터가 되고 싶습니다</h3>
+        <p>경영정보학부에서 경영과 IT를 함께 배우며, 좋은 마케팅은 감이 아니라 고객 행동에 대한 이해에서 나온다는 것을 알게 되었습니다. 이를 직접 확인한 경험이 바이브 코딩 챌린지에서 만든 ‘구독해부’ 대시보드입니다.</p>
+        <p>구독 서비스를 여러 개 쓰는 20대가 매달 어디에 얼마가 나가는지 모른다는 문제에서 출발해, 구독 목록을 입력하면 하루 단가와 사용 빈도 대비 비용을 한눈에 보여주도록 기획했습니다. ‘무엇을 보여줄까’보다 ‘사용자가 무엇을 궁금해할까’를 먼저 고민해 <span class="key">사용 빈도 대비 비용</span>을 핵심 지표로 정했습니다.</p>
+        <p>삼성전자는 스마트폰부터 가전까지 고객의 일상 전반을 연결하는 만큼, 고객 데이터에서 인사이트를 찾을 기회가 가장 많은 곳입니다. 고객의 숨은 불편을 데이터로 찾아 메시지로 바꾸는 마케터로서 삼성전자의 브랜드 가치를 높이겠습니다.</p>
+        <p class="back"><a href="#letter">목록으로 돌아가기</a></p>
+      </article>
+
+      <article class="item" id="q2">
+        <div class="meta"><span class="tag">장점·단점</span><span>목표의식과 끈기 / 일정 관리 보완</span></div>
+        <h3>목표를 정하면 끝까지 몰두합니다</h3>
+        <p>어릴 때부터 바둑을 두며 한 판을 끝까지 집중해서 두는 습관이 생겼습니다. 학생회 사무부원으로 대외활동 조사, 견적서 작성, 장소 예약, 복지 물품 관리처럼 성격이 다른 여러 업무를 맡았지만, 맡은 일은 끝까지 책임지고 완수했습니다.</p>
+        <p>반면 상황에 맞춰 유연하게 일하는 편이라 일정 관리가 부족할 때가 있습니다. 지금은 업무 시작 전에 마감일과 우선순위를 먼저 정리하고, 일정표로 진행 상황을 점검합니다. 큰 틀의 계획은 지키되 세부 실행은 유연하게 조정하는 방식은, 고객 반응에 따라 빠르게 전략을 바꿔야 하는 마케팅 업무에서 강점이 될 것입니다.</p>
+        <p class="back"><a href="#letter">목록으로 돌아가기</a></p>
+      </article>
+
+      <article class="item" id="q3">
+        <div class="meta"><span class="tag">취미·특기</span><span>바둑 / 정보를 정리해 문서로 만들기</span></div>
+        <h3>대국이 끝나면 반드시 복기합니다</h3>
+        <p>취미는 바둑으로, 휴일마다 인터넷 바둑과 대회에 참여하며 스트레스를 해소합니다. 어떤 수가 흐름을 바꿨는지 되짚는 복기 과정은 마케팅 캠페인의 성공과 실패 요인을 분석하는 밑바탕이 될 것입니다.</p>
+        <p>특기는 정보를 정리해 문서로 만드는 일입니다. 학생회에서 행사 결과 보고서를 작성하고 설문지를 직접 설계하며, 흩어진 정보를 한눈에 이해할 수 있게 정리하는 능력을 키웠습니다. 설문 결과를 다음 행사 기획에 반영해 본 경험은 고객 조사와 성과 보고가 중요한 마케팅 실무에 바로 쓰일 역량입니다.</p>
+        <p class="back"><a href="#letter">목록으로 돌아가기</a></p>
+      </article>
+
+      <article class="item" id="q4">
+        <div class="meta"><span class="tag">직무 준비</span><span>입학 첫 학기부터 시작</span></div>
+        <h3>데이터를 읽는 마케터가 되기 위해 준비하고 있습니다</h3>
+        <p>1학년 때 컴퓨터활용능력 1급과 Google Analytics 자격증(GAIQ)을 취득해 데이터 처리와 디지털 마케팅 분석의 기초를 다졌습니다. 이때 익힌 함수와 피벗 테이블 활용 능력을 학생회 보고서 작성과 구독해부 지표 설계에 바로 활용했습니다.</p>
+        <p>남은 재학 기간에도 학년별 목표를 세워 역량을 넓히겠습니다. 학년별 계획은 아래 <a href="#growth">준비 과정</a>에 정리했습니다.</p>
+        <p class="back"><a href="#letter">목록으로 돌아가기</a></p>
+      </article>
+
+      <article class="item" id="q5">
+        <div class="meta"><span class="tag">계획·포부</span><span>입사 1년 차부터 장기 목표까지</span></div>
+        <h3>‘내 생활을 이해하는 브랜드’를 만드는 디지털 마케팅 전문가</h3>
+        <p>입사 후 1년 동안은 삼성전자의 제품 라인업과 브랜드 전략을 깊이 이해하는 데 집중하겠습니다. 갤럭시와 가전이 국가별, 연령대별로 어떤 메시지로 소통하는지 정리한 브랜드 노트를 만들고, 기존 캠페인 성과를 바둑을 복기하듯 분석해 실무 감각을 기르겠습니다.</p>
+        <p>2~3년 차에는 고객이 여러 삼성 기기를 얼마나 연결해 쓰는지 분석해, 함께 쓸수록 생활이 편해진다는 점을 수치로 보여주는 캠페인을 만들고 싶습니다. 단계별 계획은 아래 <a href="#vision">포부</a>에 정리했습니다.</p>
+        <p class="back"><a href="#letter">목록으로 돌아가기</a></p>
+      </article>
+    </section>
+
+    <section id="growth" aria-labelledby="growth-h">
+      <h2 id="growth-h">준비 과정</h2>
+      <p>재학 기간 동안 학년별 목표를 세워 두었습니다.</p>
+      <div class="legend" aria-hidden="true">
+        <span><i class="stone b"></i>완료</span>
+        <span><i class="stone w"></i>계획</span>
+      </div>
+      <ol class="road">
+        <li><i class="stone b" role="img" aria-label="완료"></i>
+          <div class="when">1학년</div>
+          <p class="what">컴퓨터활용능력 1급, Google Analytics(GAIQ) 취득 · 구독해부 대시보드 기획</p></li>
+        <li><i class="stone w" role="img" aria-label="계획"></i>
+          <div class="when">2학년</div>
+          <p class="what">데이터분석 준전문가(ADsP) 취득 · 마케팅 학회에서 기업 사례 분석</p></li>
+        <li><i class="stone w" role="img" aria-label="계획"></i>
+          <div class="when">3학년</div>
+          <p class="what">SQL개발자(SQLD) 취득 · OPIc AL 등급 · 마케팅 공모전 도전</p></li>
+        <li><i class="stone w" role="img" aria-label="계획"></i>
+          <div class="when">4학년</div>
+          <p class="what">마케팅 서포터즈 · 직무 인턴으로 현장 경험</p></li>
+      </ol>
+    </section>
+
+    <section id="vision" aria-labelledby="vision-h">
+      <h2 id="vision-h">포부</h2>
+      <ol class="road">
+        <li><i class="stone w" role="img" aria-label="계획"></i>
+          <div class="when">입사 1년 차</div>
+          <p class="what">제품 라인업과 브랜드 전략 학습 · 국가별·연령대별 브랜드 노트 작성 · 빅데이터분석기사, Google Ads 인증</p></li>
+        <li><i class="stone w" role="img" aria-label="계획"></i>
+          <div class="when">2~3년 차</div>
+          <p class="what">MZ세대 고객 분석 담당 · 기기 연결 사용 데이터를 바탕으로 한 캠페인 기획</p></li>
+        <li><i class="stone w" role="img" aria-label="계획"></i>
+          <div class="when">4~5년 차</div>
+          <p class="what">해외 지역 전문가 과정 도전 · 글로벌 마케팅 역량 강화</p></li>
+        <li><i class="stone w" role="img" aria-label="계획"></i>
+          <div class="when">장기</div>
+          <p class="what">데이터 기반 의사결정을 팀의 문화로 만드는 리더</p></li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="closing">
+    <p>한 판을 마칠 때마다 복기하듯, 이 노트도 계획을 하나씩 이룰 때마다 흰 돌을 검은 돌로 바꿔 가겠습니다.</p>
+    <a href="#main">맨 위로</a>
+  </footer>
+</div>
+</body>
+</html>
